@@ -288,6 +288,17 @@ class ApiController(RedditController):
                 form.set_html(".status", md)
                 return
 
+        if kind == 'self' and not sr.can_submit_selfs(c.user):
+		msg = "Sorry, but %s doesn't allow you to post text-based posts." % sr.name
+                md = safemarkdown(msg)
+		form.set_html(".status", md)
+                return
+	
+	if kind == 'link' and not sr.can_submit_links(c.user):
+                msg = "Sorry, but %s doesn't allow you to post links." % sr.name
+                md = safemarkdown(msg)
+                form.set_html(".status", md)
+                return
 
         # well, nothing left to do but submit it
         l = Link._submit(request.post.title, url if kind == 'link' else 'self',
@@ -1139,6 +1150,8 @@ class ApiController(RedditController):
                    over_18 = VBoolean('over_18'),
                    allow_top = VBoolean('allow_top'),
                    show_media = VBoolean('show_media'),
+                   allow_links = VBoolean('allow_links'),
+                   allow_selfs = VBoolean('allow_selfs'),
                    type = VOneOf('type', ('public', 'private', 'restricted')),
                    ip = ValidIP(),
                    sponsor_text =VLength('sponsorship-text', max_length = 500),
@@ -1154,7 +1167,7 @@ class ApiController(RedditController):
         redir = False
         kw = dict((k, v) for k, v in kw.iteritems()
                   if k in ('name', 'title', 'domain', 'description', 'over_18',
-                           'show_media', 'type', 'lang', "css_on_cname",
+                           'show_media', 'allow_links', 'allow_selfs', 'type', 'lang', "css_on_cname",
                            'allow_top'))
 
         #if a user is banned, return rate-limit errors

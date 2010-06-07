@@ -163,6 +163,22 @@ function update_title(elem) {
             ${_("show thumbnail images of content")}
           </label>
         </li>
+        <li>
+          <input class="nomargin" type="checkbox" 
+                 name="allow_links" id="allow_links"
+                 ${thing.site and thing.site.allow_links and "checked='checked'" or ""}/>
+          <label for="allow_links">
+            ${_("allow the posting of links in this subreddit")}
+          </label>
+        </li>
+        <li>
+          <input class="nomargin" type="checkbox" 
+                 name="allow_selfs" id="allow_selfs"
+                 ${thing.site and thing.site.allow_selfs and "checked='checked'" or ""}/>
+          <label for="allow_selfs">
+            ${_("allow the posting of self posts in this subreddit")}
+          </label>
+        </li>
       </ul>
     </div>
   </%utils:line_field>

@@ -64,6 +64,8 @@ class Subreddit(Thing, Printable):
                      sponsorship_url = None,
                      sponsorship_img = None,
                      sponsorship_name = None,
+                     allow_links = True,
+                     allow_selfs = True,
                      )
     _essentials = ('type', 'name')
     _data_int_props = ('mod_actions',)
@@ -193,6 +195,12 @@ class Subreddit(Thing, Printable):
             return True
         else:
             return False
+
+    def can_submit_links(self, user):
+	return self.allow_links
+
+    def can_submit_selfs(self, user):
+        return self.allow_selfs
 
     def can_ban(self,user):
         return (user
