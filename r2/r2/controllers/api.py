@@ -315,9 +315,7 @@ class ApiController(RedditController):
 
             if kind == 'poll':
                 l.is_poll = True # Polls are also self posts, so they can inherit all their attributes
-                l.selftext += "\n\n"
-                for choice in choices:
-                   l.selftext += " * " + choice + "\n"
+                l.choices = choices
 
             l._commit()
             l.set_url_cache()

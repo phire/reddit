@@ -59,6 +59,7 @@ class Link(Thing, Printable):
                      pending = False,
                      disable_comments = False,
                      selftext = '',
+                     choices = [],
                      ip = '0.0.0.0')
     _essentials = ('sr_id',)
     _nsfw = re.compile(r"\bnsfw\b", re.I)

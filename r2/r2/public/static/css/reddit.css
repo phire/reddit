@@ -2819,6 +2819,22 @@ ul.tabmenu.formtab {
     background-image: url(/static/vid-expanded-hover.png); /* SPRITE */
 }
 
+.expando-button.poll.collapsed {
+    background-image: url(/static/poll-collapsed.png); /* SPRITE */
+}
+
+.expando-button.poll.collapsed:hover, .eb-vch {
+    background-image: url(/static/poll-collapsed-hover.png); /* SPRITE */
+}
+
+.expando-button.poll.expanded, .eb-ve {
+    background-image: url(/static/poll-expanded.png); /* SPRITE */
+}
+.expando-button.poll.expanded:hover, .eb-veh {
+    background-image: url(/static/poll-expanded-hover.png); /* SPRITE */
+}
+
+
 
 /******** self text stuff ****/
 .subreddit .usertext .md {

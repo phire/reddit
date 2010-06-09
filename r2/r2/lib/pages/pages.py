@@ -2321,6 +2321,12 @@ def make_link_child(item):
         if media_embed:
             link_child = MediaChild(item, media_embed, load = True)
 
+    # if the item is a poll, add a poll child
+    elif item.choices:
+        expand = getattr(item, 'expand_children', False)
+        link_child = PollChild(item, expand = expand,
+                               nofollow = item.nofollow)
+
     # if the item has selftext, add a selftext child
     elif item.selftext:
         expand = getattr(item, 'expand_children', False)
@@ -2358,6 +2364,15 @@ class SelfTextChild(LinkChild):
                      editable = c.user == self.link.author,
                      nofollow = self.nofollow)
         return u.render()
+
+class PollChild(LinkChild):
+    css_style = "poll"
+    def content(self):
+        p = Poll(choices = self.link.choices)
+        return p.render()
+
+class Poll(Templated):
+    pass
 
 class UserText(CachedTemplate):
     def __init__(self,
