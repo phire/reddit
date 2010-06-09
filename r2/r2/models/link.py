@@ -48,6 +48,7 @@ class LinkExists(Exception): pass
 class Link(Thing, Printable):
     _data_int_props = Thing._data_int_props + ('num_comments', 'reported')
     _defaults = dict(is_self = False,
+                     is_poll = False,
                      over_18 = False,
                      reported = 0, num_comments = 0,
                      moderator_banned = False,
@@ -341,6 +342,8 @@ class Link(Thing, Printable):
                 item.thumbnail = ""
             elif item.has_thumbnail:
                 item.thumbnail = thumbnail_url(item)
+            elif item.is_poll:
+                item.thumbnail = g.poll_thumb
             elif item.is_self:
                 item.thumbnail = g.self_thumb
             else:
@@ -349,7 +352,8 @@ class Link(Thing, Printable):
             item.score = max(0, item.score)
 
             item.domain = (domain(item.url) if not item.is_self
-                           else 'self.' + item.subreddit.name)
+                           else 'self.' + item.subreddit.name if not item.is_poll 
+                           else 'poll.' + item.subreddit.name)
             item.urlprefix = ''
             item.saved = bool(saved.get((user, item, 'save')))
             item.hidden = bool(hidden.get((user, item, 'hide')))

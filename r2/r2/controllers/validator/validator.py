@@ -1331,3 +1331,16 @@ class VTarget(Validator):
     def run(self, name):
         if name and self.target_re.match(name):
             return name
+
+class VPoll(Validator):
+    default_param = ('poll')
+
+    def run(self, poll = ""):
+	lines = poll.split('\n')
+	choices = []
+	for line in lines:
+            if len(line) > 0:
+                choices.append(line)
+        if len(choices) < 2:
+		self.set_error(errors.NOT_ENOUGH_CHOICES)
+        return choices

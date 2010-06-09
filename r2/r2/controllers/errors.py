@@ -76,6 +76,7 @@ error_list = dict((
         ('BAD_CARD', _('card problem: %(message)s')),
         ('TOO_LONG', _("this is too long (max: %(max_length)s)")),
         ('NO_TEXT', _('we need something here')),
+        ('NOT_ENOUGH_CHOICES', _('Not enough choices for the poll')),
     ))
 errors = Storage([(e, e) for e in error_list.keys()])
 

@@ -197,9 +197,10 @@ class ApiController(RedditController):
                    selftext = VMarkdown('text'),
                    kind = VOneOf('kind', ['link', 'self', 'poll']),
                    then = VOneOf('then', ('tb', 'comments'),
-                                 default='comments'))
+                                 default='comments'),
+                   choices = VPoll())
     def POST_submit(self, form, jquery, url, selftext, kind, title,
-                    save, sr, ip, then):
+                    choices, save, sr, ip, then):
         from r2.models.admintools import is_banned_domain
 
         if isinstance(url, (unicode, str)):
@@ -309,12 +310,14 @@ class ApiController(RedditController):
 
         if kind == 'self' or kind == 'poll': 
             l.url = l.make_permalink_slow()
+            l.is_self = True
+            l.selftext = selftext
 
-            if kind == 'self':
-                l.is_self = True
-                l.selftext = selftext
-            else:
-                l.selftext = "This is poll\n\n" + selftext
+            if kind == 'poll':
+                l.is_poll = True # Polls are also self posts, so they can inherit all their attributes
+                l.selftext += "\n\n"
+                for choice in choices:
+                   l.selftext += " * " + choice + "\n"
 
             l._commit()
             l.set_url_cache()
