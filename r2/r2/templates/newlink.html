@@ -42,6 +42,7 @@ ${thing.formtabs_menu}
 <div class="spacer">
     <div id="link-desc" class="infobar">${strings.submit_link}</div>
     <div id="text-desc" class="infobar">${strings.submit_text}</div>
+    <div id="poll-desc" class="infobar">${strings.submit_poll}</div>
 </div>
 
 <div class="spacer">
@@ -75,10 +76,27 @@ ${thing.formtabs_menu}
 </div>
 
 <div class="spacer">
+  <%utils:round_field title="${_('caption')}", description="${_('(optional)')}" id="poll-caption">
+
+    ${UserText(None, have_form = False, creating = True)}
+  </%utils:round_field>
+</div>
+
+
+<div class="spacer">
+  <%utils:round_field title="${_('design poll')}", id="poll-designer">
+    <input name="kind" value="poll" type="hidden"/>
+
+  </%utils:round_field>
+</div>
+
+<div class="spacer">
   <%utils:round_field title="${_('reddit')}" id="reddit-field">
     ${reddit_selector(thing.default_sr, thing.sr_searches, thing.subreddits)}
   </%utils:round_field>
 </div>
+
+
 
 ${thing.captcha}
     

@@ -307,10 +307,14 @@ class ApiController(RedditController):
         if banmsg:
             admintools.spam(l, banner = "domain (%s)" % banmsg)
 
-        if kind == 'self':
+        if kind == 'self' or kind == 'poll': 
             l.url = l.make_permalink_slow()
-            l.is_self = True
-            l.selftext = selftext
+
+            if kind == 'self':
+                l.is_self = True
+                l.selftext = selftext
+            else:
+                l.selftext = "This is poll\n\n" + selftext
 
             l._commit()
             l.set_url_cache()

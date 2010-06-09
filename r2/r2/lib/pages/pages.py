@@ -1406,7 +1406,9 @@ class NewLink(Templated):
     def __init__(self, captcha = None, url = '', title= '', subreddits = (),
                  then = 'comments'):
         tabs = (('link', ('link-desc', 'url-field')),
-                ('text', ('text-desc', 'text-field')))
+                ('text', ('text-desc', 'text-field')),
+                ('poll', ('poll-desc', 'poll-caption', 'poll-designer')),
+               )
         all_fields = set(chain(*(parts for (tab, parts) in tabs)))
         buttons = []
         self.default_tabs = tabs[0][1]
