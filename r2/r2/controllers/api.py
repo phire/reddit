@@ -197,7 +197,7 @@ class ApiController(RedditController):
                    kind = VOneOf('kind', ['link', 'self', 'poll']),
                    then = VOneOf('then', ('tb', 'comments'),
                                  default='comments'),
-                   choices = VPoll())
+                   choices = VPoll(),
                    extension = VLength("extension", 20))
     def POST_submit(self, form, jquery, url, selftext, kind, title,
                     save, sr, ip, then, extension, choices):
