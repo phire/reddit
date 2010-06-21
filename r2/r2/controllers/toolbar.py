@@ -97,7 +97,8 @@ class ToolbarController(RedditController):
 
         res = Frame(title = link.title,
                     url = link.url,
-                    fullname = link._fullname)
+                    fullname = link._fullname,
+                    favicon = "http://%s/favicon.ico" % link.link_domain())
         return spaceCompress(res.render())
 
     def GET_s(self, rest):
