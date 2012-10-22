@@ -51,6 +51,7 @@ def load_controllers():
     from listingcontroller import CommentsController
 
     from listingcontroller import MyredditsController
+    from listingcontroller import DefaultredditsController
 
     from feedback import FeedbackController
     from front import FormsController

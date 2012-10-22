@@ -1269,6 +1269,8 @@ class SubredditsPage(Reddit):
                                                 '/reddits/mine/contributor',
                                                 '/reddits/mine/moderator']))
 
+	buttons.append(NamedButton("defaults"))
+
         return [PageNameNav('reddits'),
                 NavMenu(buttons, base_path = '/reddits', type="tabmenu")]
 

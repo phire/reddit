@@ -946,6 +946,20 @@ class RedditsController(ListingController):
         self.where = where
         return ListingController.GET_listing(self, **env)
 
+class DefaultredditsController(ListingController):
+    render_cls = SubredditsPage
+
+    def title(self):
+        return _('default reddits')
+
+    def query(self):
+	return [Subreddit._byID(sr)._fullname for sr in Subreddit.default_subreddits()]
+
+    @listing_api_doc(section=api_section.subreddits,
+                     uri='/reddits/defaults')
+    def GET_listing(self, **env):
+        return ListingController.GET_listing(self, **env)
+
 class MyredditsController(ListingController, OAuth2ResourceController):
     render_cls = MySubredditsPage
 

@@ -72,6 +72,8 @@ def make_map():
        where='subscriber',
        requirements=dict(where='subscriber|contributor|moderator'))
 
+    mc('/reddits/defaults', controller='defaultreddits', action='listing')
+
     mc('/buttons', controller='buttons', action='button_demo_page')
 
     #/button.js and buttonlite.js - the embeds

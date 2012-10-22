@@ -147,6 +147,7 @@ menu =   MenuHandler(hot          = _('hot'),
                      popular      = _("popular"),
                      create       = _("create"),
                      mine         = _("my reddits"),
+                     defaults     = _("default reddits"),
 
                      i18n         = _("help translate"),
                      errors       = _("errors"),
